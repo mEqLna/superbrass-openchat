@@ -67,6 +67,10 @@
   .usage ol li { counter-increment: n; padding-left: 2.4em; text-indent: -2.4em; }
   .usage ol li::before { content: "（" counter(n) "）"; display: inline-block; width: 2.4em; text-indent: 0; }
   .usage p { margin: 0; padding-left: 1em; }
+  .usage ul.items { margin: 2px 0 0; padding-left: 1em; list-style: none; }
+  .usage ul.items li { padding-left: 1em; text-indent: -1em; }
+  .usage ul.items li::before { content: "・"; }
+  .usage ul.items b { font-weight: 600; }
   @media print { .usage { break-before: page; } }
 </style>
 </head>
@@ -173,8 +177,14 @@
     </ol>
     <h3>▼ミニホワイトボードについて</h3>
     <p>お部屋のドアに下記を記入して、貼り付けてください。<br>【使用しているパート名】【他パートメンバーも入って使ってよいか】【書いた人の名前】</p>
-    <h3>▼譜面台について</h3>
-    <p>利用できる譜面台は、楽屋３前の廊下にあります。<br>カートに20台ずつ乗せているので、返却の際は台数に気をつけてください。</p>
+    <h3>▼備品について</h3>
+    <p>メンバー各自が持ち出しと返却を行ってください。</p>
+    <ul class="items">
+      <li><b>イス：</b>アートスペース倉庫にある黒いイスを使用してください。／返却時はカートに積む数を確認してください。</li>
+      <li><b>長机：</b>ホール下袖から出た廊下にある茶色机を使用してください。／返却時は面合わせで収納してください。</li>
+      <li><b>打楽器：</b>楽屋５・６前の廊下にあります。／廊下の照明が付いていない場合は、スタッフに伝えてください。</li>
+      <li><b>譜面台：</b>楽屋３前の廊下にあります。／カートに20台ずつ乗せているので、返却の際は台数に気をつけてください。</li>
+    </ul>
   </section>
 </main>
 </body>
