@@ -60,6 +60,14 @@
     .sheet, .toolbar { width: auto; margin: 8px; }
     .applicant { margin-left: 0; }
   }
+  .usage { margin-top: 14px; border: 1px solid var(--line); padding: 8px 14px 10px; }
+  .usage h2 { font-size: 15px; margin: 0 0 4px; }
+  .usage h3 { font-size: 13px; margin: 8px 0 2px; }
+  .usage ol { margin: 0; padding-left: 0; list-style: none; counter-reset: n; }
+  .usage ol li { counter-increment: n; padding-left: 2.4em; text-indent: -2.4em; }
+  .usage ol li::before { content: "（" counter(n) "）"; display: inline-block; width: 2.4em; text-indent: 0; }
+  .usage p { margin: 0; padding-left: 1em; }
+  @media print { .usage { break-before: page; } }
 </style>
 </head>
 <body>
@@ -119,19 +127,19 @@
       <td>
         <div class="note-s">※ 使用する施設を記入してください。</div>
         <ul class="fac">
-          <li><span>1</span><span>施設</span><span>【 ときの風ホール 】</span></li>
+          <li><span>1</span><span>施設</span><span>【 ときの風ホール 】（鍵の貸出はなし・職員が解錠・照明点灯を行う）</span></li>
           <li><span>2</span><span>施設</span><span>【 楽屋１～４ 】</span></li>
-          <li><span>3</span><span>施設</span><span>【 アートスペース 】　（12月4日・5日・19日・20日・21日は使用しない）</span></li>
+          <li><span>3</span><span>施設</span><span>【 アートスペース 】（鍵の貸出はなし・職員が解錠・照明点灯を行う）<br>　（12月4日・5日・19日・20日・21日は使用しない）</span></li>
           <li><span>4</span><span>施設</span><span>【　　　　　　　　】</span></li>
           <li><span>5</span><span>施設</span><span>【　　　　　　　　】</span></li>
         </ul>
         <div class="note-s">※ 日ごとの使用施設は、使用日時欄に記載のとおり</div>
       </td>
     </tr>
-    <tr><th>使用する設備器具</th><td><span class="maru">有</span>（楽士用譜面台）　　　<span class="gray">無</span></td></tr>
-    <tr><th>開場時間</th><td class="blank"></td></tr>
-    <tr><th>終演（終了）時間</th><td class="blank"></td></tr>
-    <tr><th>冷暖房</th><td class="blank"><span class="gray">要　　　　不要</span></td></tr>
+    <tr><th>使用する設備器具</th><td><span class="maru">有</span>（楽士用譜面台、コンセント電源）　　　<span class="gray">無</span></td></tr>
+    <tr><th>開場時間</th><td>１８：００（全日共通）</td></tr>
+    <tr><th>終演（終了）時間</th><td>２１：００（全日共通）</td></tr>
+    <tr><th>冷暖房</th><td>当日確認</td></tr>
     <tr>
       <th>持込器具等</th>
       <td><div class="inner"><span style="flex:1"></span><span class="sub">入場料等の徴収</span><span><span class="gray">有（　　　円）</span>　<span class="maru">無</span></span></div></td>
@@ -147,8 +155,27 @@
       <th style="text-align:center;text-align-last:auto">合計</th>
     </tr>
     <tr><td class="yen">円</td><td class="yen">円</td><td class="yen">円</td></tr>
-    <tr><th style="text-align:justify;text-align-last:justify">許可条件等</th><td colspan="3" class="blank"></td></tr>
+    <tr><th style="text-align:justify;text-align-last:justify">許可条件等</th><td colspan="3">部屋内の現状復帰、譜面台等の返却</td></tr>
   </table>
+  <section class="usage">
+    <h2>利用方法</h2>
+    <h3>▼自主練習日の利用方法</h3>
+    <ol>
+      <li>アルスプラザ１階サービスセンターで上記許可書をご提示ください。</li>
+      <li>スタッフが渡す【鍵貸出簿】に、【お名前、貸出時刻、パート、部屋名】を記入してください。</li>
+      <li>アルスプラザスタッフから【鍵、利用報告書、ミニホワイトボード】を受け取ってください。</li>
+    </ol>
+    <h3>▼返却時</h3>
+    <ol>
+      <li>部屋内を使用前の状態に戻してください。</li>
+      <li>サービスセンターにて、【鍵とミニホワイトボード】を返却し、【利用報告書】を記入して提出をお願いします。</li>
+      <li>鍵貸出簿に、【返却者名と時刻】を記入してください。</li>
+    </ol>
+    <h3>▼ミニホワイトボードについて</h3>
+    <p>お部屋のドアに下記を記入して、貼り付けてください。<br>【使用しているパート名】【他パートメンバーも入って使ってよいか】【書いた人の名前】</p>
+    <h3>▼譜面台について</h3>
+    <p>利用できる譜面台は、楽屋３前の廊下にあります。<br>カートに20台ずつ乗せているので、返却の際は台数に気をつけてください。</p>
+  </section>
 </main>
 </body>
 </html>
