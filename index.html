@@ -44,10 +44,24 @@
   a.join:hover { filter:brightness(.95); }
   button { font-size:.9rem; font-family:inherit; padding:10px 14px; border-radius:6px; background:var(--grp); color:var(--ink); border:1px solid var(--line); cursor:pointer; }
   a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .qr[hidden] { display:none; }
+  .subparts { margin:-6px 0 0; font-size:.85rem; color:var(--sub); }
   .qr { display:flex; justify-content:center; padding:10px; background:var(--qrbg); border-radius:6px; border:1px solid var(--line); }
   .qr img, .qr canvas { width:160px; height:160px; }
   .copied { font-size:.8rem; color:var(--accent); min-height:1.2em; margin:-4px 0 0; }
   .pending { color:var(--sub); font-size:.9rem; margin:0; }
+  @media (max-width:600px) {
+    .wrap { padding-left:max(12px, env(safe-area-inset-left, 0px)); padding-right:max(12px, env(safe-area-inset-right, 0px)); }
+    h1 { font-size:1.25rem; }
+    .card { padding:12px; margin-bottom:12px; }
+    .list { gap:10px; }
+    .chat { padding:12px; gap:8px; }
+    .btns { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    a.join { grid-column:1 / -1; padding:14px; font-size:1.05rem; }
+    .btns button { padding:10px 6px; font-size:.85rem; }
+    .jump a { padding:6px 10px; font-size:.85rem; }
+    .copied:empty { display:none; }
+  }
 </style>
 </head>
 <body>
@@ -97,24 +111,25 @@
 <script>
 const CHATS = [
   { abbr:"Fl.Picc.", parts:["フルート","ピッコロ"], url:"https://line.me/ti/g2/q4qARaOPtDWRP_G2iH1KxdYpuIOEeUER7Ig0zg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
-  { abbr:"Ob.Fg.",   parts:["オーボエ","ファゴット"], url:"https://line.me/ti/g2/XskfjDLg0hrZ_4yv0dwcEDaLzlGNqGRZGoBTPg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
-  { abbr:"Cl.",      parts:["E♭クラリネット","B♭クラリネット","バスクラリネット"], url:"https://line.me/ti/g2/fiZcp8quiCLJr6mrrl37VMaLposoCOS18q3HkQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
-  { abbr:"Sax.",     parts:["ソプラノサックス","アルトサックス","テナーサックス","バリトンサックス"], url:"https://line.me/ti/g2/n3gBjjg1-LXKiifkJgpzXWF21rmY38psBByyMw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
+  { abbr:"Ob.Fg.", label:"ダブルリード",   parts:["オーボエ","ファゴット"], url:"https://line.me/ti/g2/XskfjDLg0hrZ_4yv0dwcEDaLzlGNqGRZGoBTPg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
+  { abbr:"Cl.", label:"クラリネット",      parts:["E♭クラリネット","B♭クラリネット","バスクラリネット"], url:"https://line.me/ti/g2/fiZcp8quiCLJr6mrrl37VMaLposoCOS18q3HkQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
+  { abbr:"Sax.", label:"サックス",     parts:["ソプラノサックス","アルトサックス","テナーサックス","バリトンサックス"], url:"https://line.me/ti/g2/n3gBjjg1-LXKiifkJgpzXWF21rmY38psBByyMw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
   { abbr:"Tp.",      parts:["トランペット","コルネット"], url:"https://line.me/ti/g2/i-qctC3P2L3gIUs6LHiFGUyYgS_7DBBhxIrbkw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
   { abbr:"Hn.",      parts:["ホルン"], url:"https://line.me/ti/g2/8YcamfMEBE4njBfAmoACCtoeuvsVPoQNeWIiBw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
-  { abbr:"Trb.",     parts:["トロンボーン","バストロンボーン"], url:"https://line.me/ti/g2/5AzDhVtuj-NEmr3mfjENLaHkC2B2lKzZ9rGagQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
+  { abbr:"Trb.", label:"トロンボーン",     parts:["トロンボーン","バストロンボーン"], url:"https://line.me/ti/g2/5AzDhVtuj-NEmr3mfjENLaHkC2B2lKzZ9rGagQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
   { abbr:"Euph.",    parts:["ユーフォニアム"], url:"https://line.me/ti/g2/tXBg_JbQgwxJqj2ODVZLnNOcRgp17RmkO-zeEA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
-  { abbr:"Tb.Cb.",   parts:["チューバ","コントラバス"], url:"https://line.me/ti/g2/m8lAqWD2tfOtRB8CB0WdouAJudvNV4Uc3zmpeg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
+  { abbr:"Tb.Cb.", label:"低音（チューバ・コントラバス）",   parts:["チューバ","コントラバス"], url:"https://line.me/ti/g2/m8lAqWD2tfOtRB8CB0WdouAJudvNV4Uc3zmpeg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" },
   { abbr:"Perc.",    parts:["打楽器"], url:"https://line.me/ti/g2/ltAMnLSrsUefKVDHYYOgfYfdDZyD9RqY-zEo1Q?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" }
 ];
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const title = c => c.parts.join("・");
+const title = c => c.label || c.parts.join("・");
+const sub = c => c.label && c.parts.length > 1 ? `<p class="subparts">${esc(c.parts.join("・"))}</p>` : "";
 
 $("jump").innerHTML = CHATS.map((c,i) => `<a href="#c${i}">${esc(title(c))}</a>`).join("");
 $("list").innerHTML = CHATS.map((c,i) => c.url ? `
   <section class="chat" id="c${i}">
-    <h3>${esc(title(c))}<span class="abbr">${esc(c.abbr)}</span></h3>
+    <h3>${esc(title(c))}<span class="abbr">${esc(c.abbr)}</span></h3>${sub(c)}
     <p class="room">オープンチャット名：スーパーブラス2期メン(${esc(c.abbr)})</p>
     <div class="btns">
       <a class="join" href="${esc(c.url)}" target="_blank" rel="noopener">LINEで参加する</a>
